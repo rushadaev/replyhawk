@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ReplyHawk — AI that replies first. Win every Yelp, Thumbtack & Google lead.</title>
+<meta name="description" content="ReplyHawk is an AI lead-response platform for home-service businesses. Replies to Yelp, Thumbtack and Google LSA in under 30 seconds, calls the customer, and books the job — 24/7." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23FF5A1F' d='M8 32 L40 12 L36 30 L56 30 L24 52 L30 34 L8 32Z'/%3E%3C/svg%3E" />
+
+<style>
+  :root {
+    --ink:    #0B1220;
+    --ink-2:  #1A2235;
+    --bone:   #F7F8FA;
+    --card:   #FFFFFF;
+    --accent: #FF5A1F;
+    --gold:   #FFB300;
+    --muted:  #6B7280;
+    --line:   #E5E7EB;
+    --good:   #10B981;
+    --maxw:   1180px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font: 400 16px/1.55 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--bone);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* Layout */
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; }
+  section.tight { padding: 64px 0; }
+
+  /* Header */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,248,250,.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.01em; font-size: 18px; }
+  .brand svg { width: 28px; height: 28px; }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink); color: #fff; padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 14px;
+    transition: background .15s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero {
+    background: var(--ink); color: #fff; padding: 120px 0 100px;
+    background-image: radial-gradient(1200px 600px at 80% -10%, rgba(255,90,31,.18), transparent 60%);
+  }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05; font-weight: 800; letter-spacing: -.025em; margin: 0 0 24px;
+    max-width: 18ch;
+  }
+  .hero h1 .strike { color: var(--accent); }
+  .hero p.lede { font-size: clamp(16px, 1.4vw, 19px); color: #cbd2dc; max-width: 56ch; margin: 0 0 32px; line-height: 1.55; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; border-radius: 10px; font-weight: 700; font-size: 15px;
+    transition: transform .1s, background .15s, color .15s, border-color .15s;
+    cursor: pointer; border: 1px solid transparent;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #ff7340; }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.25); }
+  .btn-ghost:hover { border-color: #fff; }
+
+  .hero-grid {
+    margin-top: 56px;
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; padding: 22px;
+  }
+  .stat-num { font-size: 34px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+  .stat-num .unit { font-size: 18px; color: var(--accent); margin-left: 2px; }
+  .stat-label { font-size: 13px; color: #9aa3b2; margin-top: 4px; }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: repeat(2,1fr); } }
+
+  /* Section eyebrow */
+  .eyebrow {
+    display: inline-block; padding: 5px 11px; border-radius: 999px;
+    background: #FFE9DD; color: var(--accent); font-size: 12px;
+    font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h2 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; margin: 0 0 16px; max-width: 22ch; }
+  h2.center, p.center, .center { text-align: center; margin-left: auto; margin-right: auto; }
+  p.sub { color: var(--muted); font-size: 17px; max-width: 60ch; margin: 0 0 48px; }
+
+  /* Problem cards */
+  .problem-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+  .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .pcard .icon { width: 38px; height: 38px; border-radius: 10px; background: #FFE9DD; color: var(--accent);
+    display: grid; place-items: center; font-weight: 800; margin-bottom: 16px; }
+  .pcard h3 { margin: 0 0 6px; font-size: 18px; }
+  .pcard p { color: var(--muted); margin: 0; font-size: 15px; }
+  @media (max-width: 880px) { .problem-grid { grid-template-columns: 1fr; } }
+
+  /* Steps (how it works) */
+  .steps { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); counter-reset: step; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; position: relative; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; top: 26px; right: 26px;
+    font-size: 38px; font-weight: 800; color: #FFE9DD; line-height: 1;
+  }
+  .step h3 { margin: 0 0 8px; font-size: 17px; }
+  .step p { color: var(--muted); font-size: 14.5px; margin: 0; }
+  @media (max-width: 880px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+
+  /* Platforms */
+  .platforms { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+  .plat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 30px; position: relative; overflow: hidden;
+  }
+  .plat .badge {
+    position: absolute; top: 22px; right: 22px;
+    background: var(--ink); color: #fff; font-size: 12px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .plat h3 { margin: 0 0 8px; font-size: 22px; }
+  .plat .speed { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .03em; text-transform: uppercase; }
+  .plat ul { padding: 14px 0 0 18px; margin: 0; color: var(--muted); font-size: 14.5px; }
+  .plat ul li { margin: 6px 0; }
+  .plat.soon { background: linear-gradient(180deg, var(--card), #fafbfd); border-style: dashed; }
+  @media (max-width: 880px) { .platforms { grid-template-columns: 1fr; } }
+
+  /* Features */
+  .features { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+  .feat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .feat .ficon { width: 42px; height: 42px; border-radius: 12px; background: var(--ink); color: var(--accent);
+    display: grid; place-items: center; margin-bottom: 16px; }
+  .feat h3 { margin: 0 0 8px; font-size: 17px; }
+  .feat p { color: var(--muted); font-size: 14.5px; margin: 0; }
+  @media (max-width: 880px) { .features { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .features { grid-template-columns: 1fr; } }
+
+  /* Pricing */
+  .pricing { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .price-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 36px;
+    display: flex; flex-direction: column;
+  }
+  .price-card.featured { background: var(--ink); color: #fff; border-color: var(--ink);
+    box-shadow: 0 20px 40px -20px rgba(11,18,32,.4); }
+  .price-tag { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
+  .price-card h3 { margin: 0 0 6px; font-size: 22px; }
+  .price-card .desc { color: var(--muted); font-size: 14.5px; margin: 0 0 22px; }
+  .price-card.featured .desc { color: #9aa3b2; }
+  .price-amount { font-size: 50px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .price-amount .per { font-size: 16px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+  .price-card.featured .price-amount .per { color: #9aa3b2; }
+  .price-list { padding: 22px 0 0; margin: 0; list-style: none; }
+  .price-list li {
+    padding: 8px 0 8px 26px; position: relative; font-size: 14.5px;
+  }
+  .price-list li::before {
+    content: ""; position: absolute; left: 0; top: 12px; width: 14px; height: 14px;
+    background: var(--accent); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5L6 12.5L14 4' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5L6 12.5L14 4' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .price-card .btn { margin-top: auto; align-self: stretch; justify-content: center; }
+  @media (max-width: 880px) { .pricing { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    margin-bottom: 12px; padding: 18px 22px;
+  }
+  details > summary {
+    list-style: none; cursor: pointer; font-weight: 600; font-size: 16px;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::after { content: "+"; font-size: 22px; color: var(--muted); }
+  details[open] > summary::after { content: "−"; color: var(--accent); }
+  details > p { color: var(--muted); margin: 14px 0 0; font-size: 15px; line-height: 1.6; }
+
+  /* CTA strip */
+  .cta-strip { background: var(--ink); color: #fff; border-radius: 22px; padding: 60px; text-align: center;
+    background-image: radial-gradient(800px 400px at 50% -10%, rgba(255,90,31,.22), transparent 60%); }
+  .cta-strip h2 { color: #fff; margin: 0 auto 14px; }
+  .cta-strip p { color: #cbd2dc; max-width: 50ch; margin: 0 auto 28px; }
+
+  /* Demo form */
+  .demo {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 40px; max-width: 720px; margin: 0 auto;
+  }
+  .demo h3 { margin: 0 0 8px; font-size: 24px; }
+  .demo p { color: var(--muted); margin: 0 0 24px; }
+  .form-grid { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  .form-grid .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  input, select, textarea {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--line); border-radius: 9px;
+    font: inherit; font-size: 15px; background: #fff; outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,90,31,.12); }
+  textarea { resize: vertical; min-height: 90px; }
+  .form-grid .btn { margin-top: 6px; }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+  #form-thanks { display: none; padding: 20px; background: #ECFDF5; color: #065F46; border-radius: 10px; font-weight: 600; }
+
+  /* Footer */
+  footer {
+    background: var(--ink); color: #9aa3b2;
+    padding: 60px 0 32px; margin-top: 60px;
+  }
+  .foot-grid { display: grid; gap: 40px; grid-template-columns: 2fr 1fr 1fr 1fr; align-items: start; }
+  footer .brand { color: #fff; }
+  footer h4 { color: #fff; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 14px; }
+  footer a { display: block; padding: 4px 0; font-size: 14px; }
+  footer a:hover { color: var(--accent); }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,.08); margin-top: 40px; padding-top: 22px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 13px; gap: 12px; }
+  @media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* Logo svg helper */
+  .logo-mark { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path fill="#0B1220" d="M8 32 L40 12 L36 30 L56 30 L24 52 L30 34 L8 32Z"/>
+        <circle cx="42" cy="20" r="2.4" fill="#FF5A1F"/>
+      </svg>
+      ReplyHawk
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#demo" class="nav-cta">Get a demo</a>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1>Reply first. <span class="strike">Win every lead.</span></h1>
+    <p class="lede">
+      ReplyHawk is an AI that replies to your Yelp, Thumbtack, and Google leads in under 30 seconds — then calls the customer to lock in the job. Your competitors are still reading the notification when you're already on the phone.
+    </p>
+    <div class="hero-ctas">
+      <a href="#demo" class="btn btn-primary">Start free for 7 days →</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+
+    <div class="hero-grid">
+      <div class="stat"><div class="stat-num">10<span class="unit">s</span></div><div class="stat-label">Median response time</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Platforms supported</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Always on, never sleeps</div></div>
+      <div class="stat"><div class="stat-num">100<span class="unit">%</span></div><div class="stat-label">Reply rate, every lead</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROBLEM ====== -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">The problem</span>
+    <h2>Every lead goes to 5 pros. The fastest one wins.</h2>
+    <p class="sub">MIT found leads contacted within 5 minutes are 21× more likely to convert. Only 7% of businesses respond that fast. The other 93% are losing deals they already paid for.</p>
+
+    <div class="problem-grid">
+      <div class="pcard">
+        <div class="icon">⏱</div>
+        <h3>You're on a job site</h3>
+        <p>The notification buzzes at 2:47 PM. You see it at 4:15. By then the customer hired the guy who replied at 2:48.</p>
+      </div>
+      <div class="pcard">
+        <div class="icon">🌙</div>
+        <h3>Nights and weekends are dead</h3>
+        <p>Half of all home-service leads come in after hours. Without automation, they sit until Monday — and they're gone.</p>
+      </div>
+      <div class="pcard">
+        <div class="icon">📭</div>
+        <h3>No follow-up = cold lead</h3>
+        <p>Customer goes quiet for an hour and forgets you exist. You needed three pings. You sent zero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section id="how" style="background: #fff;">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Plug in once. Win leads forever.</h2>
+    <p class="sub">No engineers. No 40-page setup guide. Connect your accounts, tell us about your business, flip the switch.</p>
+
+    <div class="steps">
+      <div class="step"><h3>Connect</h3><p>One-click OAuth to Yelp and Thumbtack. Google LSA links via manager invite. Two minutes, done.</p></div>
+      <div class="step"><h3>Train</h3><p>Tell us your services, pricing, license, hours, and tone. The AI learns to reply exactly like you would.</p></div>
+      <div class="step"><h3>Activate</h3><p>Flip on. The next lead that arrives gets a reply in under 30 seconds — and a callback queued for you to close.</p></div>
+      <div class="step"><h3>Close</h3><p>Customer replies → AI handles the back-and-forth, qualifies, books the appointment. You walk in to a closed deal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PLATFORMS ====== -->
+<section id="platforms">
+  <div class="wrap">
+    <span class="eyebrow">Platforms</span>
+    <h2>One AI. Every lead source you use.</h2>
+    <p class="sub">Direct integrations — not browser hacks. The same conversation thread, but ten times faster.</p>
+
+    <div class="platforms">
+      <div class="plat">
+        <h3>Yelp</h3>
+        <div class="speed">~10 sec reply</div>
+        <ul>
+          <li>Replies to quote requests and DMs in seconds</li>
+          <li>Improves your Yelp Response Time badge</li>
+          <li>Auto-call bridges you to the customer the moment they share a phone</li>
+          <li>Smart follow-ups for silent leads</li>
+        </ul>
+      </div>
+
+      <div class="plat">
+        <h3>Thumbtack</h3>
+        <div class="speed">~20 sec reply + SMS</div>
+        <ul>
+          <li>Replies via Thumbtack messaging <em>and</em> direct SMS to the customer's phone</li>
+          <li>Customer doesn't have to re-open the app — your message is on their lock screen</li>
+          <li>Filters out unqualified leads automatically</li>
+          <li>Auto-call bridges you live</li>
+        </ul>
+      </div>
+
+      <div class="plat soon">
+        <div class="badge">Coming soon</div>
+        <h3>Google LSA</h3>
+        <div class="speed">~30 sec reply</div>
+        <ul>
+          <li>Connects via secure Google Ads manager invite</li>
+          <li>Replies to LSA message leads in seconds</li>
+          <li>Auto-call bridges, 24/7 coverage</li>
+          <li>Maximizes every dollar of your ad spend</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section id="features" style="background: #fff;">
+  <div class="wrap">
+    <span class="eyebrow">Features</span>
+    <h2>Built to close — not just to reply.</h2>
+    <p class="sub">Speed gets you in the door. The AI's job is to keep the customer talking until the deal is yours.</p>
+
+    <div class="features">
+      <div class="feat">
+        <div class="ficon">⚡</div>
+        <h3>Replies that sound like you</h3>
+        <p>Context-aware, written in your voice, with a clear next-step. Customers don't realize it's AI.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">📞</div>
+        <h3>Instant two-way calls</h3>
+        <p>The moment a customer shares a number, ReplyHawk dials your phone. Press 1 — you're live with them.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">🤖</div>
+        <h3>AI that takes the call</h3>
+        <p>Optional voice agent answers when you can't, qualifies the lead, and books the visit — in your voice, in English or Spanish.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">🎯</div>
+        <h3>Filters out time-wasters</h3>
+        <p>Tell us what you don't do (or won't take). The AI politely declines and saves your inbox for paying jobs.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">🔁</div>
+        <h3>Never let a lead go cold</h3>
+        <p>Customer went quiet? Smart follow-ups at +10 min, +1 hr, +24 hr re-ignite the conversation. No lead left behind.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">📥</div>
+        <h3>One unified inbox</h3>
+        <p>Yelp, Thumbtack, Google LSA, and SMS in one place. No app-switching. No missed messages.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="center">Pay for leads we replied to. Not seats. Not contracts.</h2>
+    <p class="sub center">First 7 days free. Cancel anytime. One extra booked job pays for hundreds of replies.</p>
+
+    <div class="pricing">
+      <div class="price-card">
+        <div class="price-tag">Starter</div>
+        <h3>For solo pros</h3>
+        <p class="desc">Just you, one business, one or two lead sources. Up to 30 leads/week.</p>
+        <div class="price-amount">$1.99<span class="per">/lead replied</span></div>
+        <ul class="price-list">
+          <li>Yelp + Thumbtack integrations</li>
+          <li>AI replies, follow-ups, qualification</li>
+          <li>2-way auto-call bridging</li>
+          <li>SMS to customer (where supported)</li>
+          <li>Email and SMS alerts for hot leads</li>
+        </ul>
+        <a href="#demo" class="btn btn-primary">Start free trial</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-tag">Pro</div>
+        <h3>For growing crews</h3>
+        <p class="desc">Multi-platform, multi-business, with the AI voice agent and analytics.</p>
+        <div class="price-amount">$1.49<span class="per">/lead after 30/wk</span></div>
+        <ul class="price-list">
+          <li>Everything in Starter</li>
+          <li>Google LSA integration (coming soon)</li>
+          <li>AI voice agent for inbound &amp; outbound calls</li>
+          <li>Unlimited businesses and crews</li>
+          <li>Dedicated onboarding and tuning</li>
+        </ul>
+        <a href="#demo" class="btn btn-primary">Get a demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq" style="background: #fff;">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="center">Common questions.</h2>
+    <p class="sub center">Don't see yours? Email us — we reply faster than our bot.</p>
+
+    <div class="faq">
+      <details>
+        <summary>Is this safe for my Yelp / Thumbtack account?</summary>
+        <p>Yes. We connect through each platform's official authorization — OAuth for Yelp and Thumbtack, manager invite for Google LSA. You never share a password. ReplyHawk is built to play nice with platform terms.</p>
+      </details>
+      <details>
+        <summary>How does the AI know what to say?</summary>
+        <p>You set up a short business profile in the dashboard: services, prices, hours, license, tone, services-not-offered. The AI uses that profile, plus the full conversation history, to write each reply in your voice. You can also paste in a few of your favorite past replies as voice examples.</p>
+      </details>
+      <details>
+        <summary>What if the AI gets a question it can't handle?</summary>
+        <p>It collects the customer's contact info, sends you an SMS and email immediately, and steps aside so you can pick up. You can also jump in at any time — the bot detects when you start typing and yields the conversation.</p>
+      </details>
+      <details>
+        <summary>How fast is setup?</summary>
+        <p>About two minutes if you have your Yelp Business and Thumbtack Pro logins handy. Google LSA takes one more step (accepting a manager invite from your Google Ads dashboard). Free setup help if you want it.</p>
+      </details>
+      <details>
+        <summary>Can the AI actually call my customer and talk?</summary>
+        <p>Yes. On the Pro plan, the optional voice agent answers inbound calls when you can't, and places outbound qualification calls. It can answer in English or Spanish, book the appointment, and write the outcome back to your inbox.</p>
+      </details>
+      <details>
+        <summary>Can I cancel anytime?</summary>
+        <p>Anytime, in two clicks. No contracts. If you cancel mid-month, you only pay for leads we already replied to.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA STRIP ====== -->
+<section class="tight">
+  <div class="wrap">
+    <div class="cta-strip">
+      <h2 class="center">Every hour you wait, a competitor wins a job.</h2>
+      <p>7-day free trial. Live in two minutes. No commitment, no contract.</p>
+      <a href="#demo" class="btn btn-primary">Start free trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DEMO FORM ====== -->
+<section id="demo" class="tight">
+  <div class="wrap">
+    <span class="eyebrow center" style="display:block; text-align:center;">Get a demo</span>
+    <h2 class="center">See it run on your real leads.</h2>
+    <p class="sub center">15-minute call. We'll show you a live response to one of your recent Yelp or Thumbtack leads.</p>
+
+    <div class="demo">
+      <form id="demo-form" onsubmit="event.preventDefault(); document.getElementById('demo-form').style.display='none'; document.getElementById('form-thanks').style.display='block';">
+        <div class="form-grid">
+          <div>
+            <label for="f-name">Name *</label>
+            <input id="f-name" required type="text" autocomplete="name" />
+          </div>
+          <div>
+            <label for="f-company">Business name *</label>
+            <input id="f-company" required type="text" />
+          </div>
+          <div>
+            <label for="f-email">Email *</label>
+            <input id="f-email" required type="email" autocomplete="email" />
+          </div>
+          <div>
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" type="tel" autocomplete="tel" />
+          </div>
+          <div class="full">
+            <label for="f-leads">Leads received in the last 30 days *</label>
+            <select id="f-leads" required>
+              <option value="">Select…</option>
+              <option>1–10</option>
+              <option>11–30</option>
+              <option>31–50</option>
+              <option>51–100</option>
+              <option>100–200</option>
+              <option>200+</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="f-msg">Anything else?</label>
+            <textarea id="f-msg" placeholder="What platforms do you use? Any specific pain?"></textarea>
+          </div>
+          <div class="full">
+            <button type="submit" class="btn btn-primary" style="width:100%;">Request a demo →</button>
+          </div>
+        </div>
+        <p style="margin: 14px 0 0; font-size: 12px; color: var(--muted);">By submitting, you agree to our Privacy Policy and Terms.</p>
+      </form>
+      <div id="form-thanks">✅ Got it. We'll reply within an hour with two demo slots.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 12px;">
+          <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <path fill="#fff" d="M8 32 L40 12 L36 30 L56 30 L24 52 L30 34 L8 32Z"/>
+            <circle cx="42" cy="20" r="2.4" fill="#FF5A1F"/>
+          </svg>
+          ReplyHawk
+        </div>
+        <p style="margin: 0; font-size: 14px; max-width: 38ch;">
+          AI lead-response for home-service businesses. Reply first. Win every lead.
+        </p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#platforms">Platforms</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#demo">Get a demo</a>
+        <a href="mailto:partnerships@replyhawk.ai">Partnerships</a>
+        <a href="mailto:founders@replyhawk.ai">Contact</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/terms.html#4">Acceptable use</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 ReplyHawk, Inc. All rights reserved.</div>
+      <div>
+        Yelp, Thumbtack, and Google Local Services Ads are trademarks of their respective owners. ReplyHawk is not affiliated with or endorsed by them.
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

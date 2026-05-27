@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — ReplyHawk</title>
+  <meta name="description" content="How ReplyHawk collects, uses, and protects personal data on behalf of home-service professionals and their customers." />
+  <style>
+    :root { color-scheme: light; }
+    body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:#0b0d10; background:#fff; }
+    main { max-width:720px; margin:0 auto; padding:48px 24px 80px; }
+    h1 { font-size:32px; line-height:1.2; margin:0 0 8px; }
+    h2 { font-size:20px; margin:36px 0 8px; }
+    h3 { font-size:16px; margin:20px 0 4px; }
+    .updated { color:#6b7280; font-size:14px; margin-bottom:32px; }
+    p, li { color:#1f2937; }
+    a { color:#1d4ed8; }
+    nav { padding:16px 24px; border-bottom:1px solid #e5e7eb; font-size:14px; }
+    nav a { color:#0b0d10; text-decoration:none; font-weight:600; }
+    footer { padding:24px; border-top:1px solid #e5e7eb; color:#6b7280; font-size:13px; text-align:center; }
+    code { background:#f3f4f6; padding:2px 6px; border-radius:4px; font-size:14px; }
+  </style>
+</head>
+<body>
+<nav><a href="/">← ReplyHawk</a></nav>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: May 26, 2026</p>
+
+  <p>This Privacy Policy explains how ReplyHawk, Inc. ("ReplyHawk", "we", "us") collects, uses, and discloses information when home-service professionals ("Pros") use our platform to receive and respond to leads from third-party sources such as Yelp, Thumbtack, Google Local Services Ads, and their own websites.</p>
+
+  <h2>1. Who controls your data</h2>
+  <p>ReplyHawk is a data processor acting on behalf of each Pro. The Pro is the data controller for their leads and customers; ReplyHawk processes that data solely to provide the service.</p>
+
+  <h2>2. Information we collect</h2>
+  <h3>From the Pro</h3>
+  <ul>
+    <li>Account information: name, business name, email, phone, business address.</li>
+    <li>Authorization tokens for connected third-party platforms (Yelp, Thumbtack, Google LSA) — obtained via OAuth or platform-supported delegation. We never request or store the Pro's password.</li>
+    <li>Business profile (services offered, service area, hours, pricing notes) used to draft replies.</li>
+    <li>Configuration: outreach preferences, calling hours, AI tone settings.</li>
+  </ul>
+  <h3>From customers / leads (collected on the Pro's behalf)</h3>
+  <ul>
+    <li>Name (when shared by the lead source).</li>
+    <li>Contact information (phone number, email) — only when explicitly shared by the customer.</li>
+    <li>Conversation messages exchanged through the connected platform.</li>
+    <li>Project metadata provided by the customer (service type, location, scope).</li>
+    <li>Outbound call audio, transcripts, and call metadata (start time, duration, outcome).</li>
+  </ul>
+  <h3>Automatically</h3>
+  <ul>
+    <li>Usage analytics (page views, feature use, error logs) — pseudonymized.</li>
+    <li>Standard server logs (IP, user agent, timestamps) for security and debugging.</li>
+  </ul>
+
+  <h2>3. How we use information</h2>
+  <ul>
+    <li>To pull a Pro's leads and conversations from connected platforms via their official APIs.</li>
+    <li>To draft suggested replies using large language models, conditioned on the Pro's business profile.</li>
+    <li>To send replies, place outbound calls, and send SMS only when the Pro has authorized that action (manually or via a written automation rule the Pro configured).</li>
+    <li>To detect and prevent abuse, fraud, and platform-rule violations.</li>
+    <li>To improve the service. We do not train third-party LLMs on Pro or customer data.</li>
+  </ul>
+
+  <h2>4. Subprocessors</h2>
+  <p>ReplyHawk uses the following service providers to deliver the service. We have a data-processing agreement in place with each.</p>
+  <ul>
+    <li><strong>Anthropic</strong> (AI reply drafting). Data is sent under no-training terms.</li>
+    <li><strong>ElevenLabs</strong> (voice agent for outbound calls).</li>
+    <li><strong>Twilio</strong> (PSTN voice + SMS).</li>
+    <li><strong>Cloudflare</strong> (CDN, DDoS, transit security).</li>
+    <li>Cloud hosting provider for application + database (US region).</li>
+  </ul>
+
+  <h2>5. How we share information</h2>
+  <p>We do not sell personal information. We share data only:</p>
+  <ul>
+    <li>With the Pro who controls the lead.</li>
+    <li>With the subprocessors listed above, strictly to deliver the service.</li>
+    <li>With the third-party platform (Yelp, Thumbtack, Google) when sending a reply to that platform on the Pro's behalf.</li>
+    <li>When required by law, valid legal process, or to protect rights and safety.</li>
+  </ul>
+
+  <h2>6. Retention</h2>
+  <p>Lead and conversation data is retained while the Pro's account is active and for up to 90 days after deletion to allow recovery. Call audio is retained for 30 days unless the Pro extends the period. Audit logs are retained 12 months for security.</p>
+
+  <h2>7. Security</h2>
+  <p>Data in transit is encrypted via TLS 1.2+. Data at rest is encrypted with AES-256. Access to production systems requires SSO with hardware security keys. We follow industry standard practices for vulnerability management and incident response.</p>
+
+  <h2>8. Your choices</h2>
+  <ul>
+    <li>Pros can disconnect any third-party platform at any time, revoking ReplyHawk's access.</li>
+    <li>Pros can delete their account; we will remove personal data within 30 days subject to legal retention obligations.</li>
+    <li>Customers (consumers contacted by the Pro through ReplyHawk) can request access to or deletion of their data by contacting us at <a href="mailto:privacy@replyhawk.ai">privacy@replyhawk.ai</a>. We will route the request to the controlling Pro and assist as required by law.</li>
+  </ul>
+
+  <h2>9. California, EU, and other jurisdictions</h2>
+  <p>California residents have additional rights under the CCPA/CPRA (access, deletion, correction, opt-out of sale — note: we do not sell personal information). EU/UK residents have rights under GDPR/UK GDPR (access, rectification, erasure, restriction, portability, objection). Submit requests to <a href="mailto:privacy@replyhawk.ai">privacy@replyhawk.ai</a>.</p>
+
+  <h2>10. Children</h2>
+  <p>ReplyHawk is not directed to children under 13 and we do not knowingly collect their data.</p>
+
+  <h2>11. Changes</h2>
+  <p>We may update this policy. Material changes will be announced via in-product notice or email 30 days before they take effect.</p>
+
+  <h2>12. Contact</h2>
+  <p>Privacy questions: <a href="mailto:privacy@replyhawk.ai">privacy@replyhawk.ai</a><br>General: <a href="mailto:hello@replyhawk.ai">hello@replyhawk.ai</a></p>
+</main>
+<footer>© 2026 ReplyHawk, Inc.</footer>
+</body>
+</html>
