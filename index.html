@@ -613,7 +613,7 @@
     <div class="demo">
       <form id="demo-form" onsubmit="return submitDemo(event)">
         <div class="form-grid">
-          <input type="text" id="f-hp" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true"
+          <input type="text" id="f-hp" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true"
                  style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
           <div>
             <label for="f-name">Name *</label>
@@ -718,7 +718,7 @@
       phone: val('f-phone'),
       leadsRange: val('f-leads'),
       message: val('f-msg'),
-      company_website: val('f-hp'),
+      hp_field: val('f-hp'),
     };
     if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
     try {
