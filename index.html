@@ -159,6 +159,21 @@
   @media (max-width: 880px) { .flow { grid-template-columns: 1fr 1fr; } .stage .arrow { display: none; } .guarantees { grid-template-columns: 1fr; } }
   @media (max-width: 540px) { .flow { grid-template-columns: 1fr; } }
 
+  /* CRM board mock */
+  .board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 8px 0 40px;
+    background: var(--ink); border-radius: 16px; padding: 16px; }
+  .col { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 11px; padding: 10px; }
+  .col-h { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #94A3B8;
+    display: flex; justify-content: space-between; margin-bottom: 9px; }
+  .col-h .n { color: #64748B; }
+  .lc { background: #fff; border-radius: 9px; padding: 9px 10px; margin-bottom: 7px; }
+  .lc:last-child { margin-bottom: 0; }
+  .lc .nm { font-weight: 700; font-size: 12.5px; }
+  .lc .mt { color: var(--muted); font-size: 11px; margin-top: 1px; }
+  .lc .nx { margin-top: 7px; font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .nx.call { color: var(--accent); } .nx.reply { color: #0284C7; } .nx.won { color: var(--good); } .nx.wait { color: #B45309; }
+  @media (max-width: 880px) { .board { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 78%; overflow-x: auto; } }
+
   /* Platforms */
   .platforms { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
   .plat {
@@ -288,7 +303,7 @@
     </a>
     <nav class="nav-links">
       <a href="#how">How it works</a>
-      <a href="#flow">The flow</a>
+      <a href="#flow">Dashboard</a>
       <a href="#platforms">Platforms</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
@@ -301,21 +316,21 @@
 <!-- ====== HERO ====== -->
 <section class="hero" id="top">
   <div class="wrap">
-    <h1>Reply first. <span class="strike">Win every lead.</span></h1>
+    <h1>The first to reply gets the job.</h1>
     <p class="lede">
-      ReplyHawk is an AI that watches your Yelp and Thumbtack leads, then calls the customer in seconds to lock in the job. Installs as a Mac app in two minutes. Your competitors are still reading the notification when you're already on the phone.
+      ReplyHawk watches your Yelp and Thumbtack leads and contacts every one in seconds — an AI replies on the thread and calls the customer — then tracks the whole job in one dashboard. Runs as a Mac app. Set up in minutes.
     </p>
     <div class="hero-ctas">
       <a href="#demo" class="btn btn-primary">Start free for 7 days →</a>
-      <a href="#how" class="btn btn-ghost">See how it works</a>
+      <a href="#flow" class="btn btn-ghost">See the dashboard</a>
     </div>
-    <p style="color:var(--muted); font-size:13px; margin-top:14px;">Desktop app for macOS · Windows coming soon</p>
+    <p style="color:var(--muted); font-size:13px; margin-top:14px;">macOS app · Windows coming soon</p>
 
     <div class="hero-grid">
-      <div class="stat"><div class="stat-num">10<span class="unit">s</span></div><div class="stat-label">Median response time</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Platforms supported</div></div>
-      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Always on, never sleeps</div></div>
-      <div class="stat"><div class="stat-num">100<span class="unit">%</span></div><div class="stat-label">Reply rate, every lead</div></div>
+      <div class="stat"><div class="stat-num">Seconds</div><div class="stat-label">From new lead to first reply</div></div>
+      <div class="stat"><div class="stat-num">Yelp + Thumbtack</div><div class="stat-label">Watched in one inbox</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Replies while you work or sleep</div></div>
+      <div class="stat"><div class="stat-num">Every lead</div><div class="stat-label">Called, texted, and tracked</div></div>
     </div>
   </div>
 </section>
@@ -324,24 +339,24 @@
 <section>
   <div class="wrap">
     <span class="eyebrow">The problem</span>
-    <h2>Every lead goes to 5 pros. The fastest one wins.</h2>
-    <p class="sub">MIT found leads contacted within 5 minutes are 21× more likely to convert. Only 7% of businesses respond that fast. The other 93% are losing deals they already paid for.</p>
+    <h2>Every lead goes to several pros. The fastest reply wins it.</h2>
+    <p class="sub">On Yelp and Thumbtack the customer messages multiple businesses at once. Whoever answers first usually gets the job — and you can't be first when you're under a sink.</p>
 
     <div class="problem-grid">
       <div class="pcard">
         <div class="icon">⏱</div>
-        <h3>You're on a job site</h3>
-        <p>The notification buzzes at 2:47 PM. You see it at 4:15. By then the customer hired the guy who replied at 2:48.</p>
+        <h3>You're on a job</h3>
+        <p>The lead comes in at 2:47. You see it at 4:15. By then someone already replied — and booked it.</p>
       </div>
       <div class="pcard">
         <div class="icon">🌙</div>
-        <h3>Nights and weekends are dead</h3>
-        <p>Half of all home-service leads come in after hours. Without automation, they sit until Monday — and they're gone.</p>
+        <h3>After hours, leads sit</h3>
+        <p>Nights and weekends fill your inbox with leads that go cold before Monday morning.</p>
       </div>
       <div class="pcard">
         <div class="icon">📭</div>
-        <h3>No follow-up = cold lead</h3>
-        <p>Customer goes quiet for an hour and forgets you exist. You needed three pings. You sent zero.</p>
+        <h3>No follow-up, no job</h3>
+        <p>A customer goes quiet and forgets you. One or two nudges would've closed it — but nobody sent them.</p>
       </div>
     </div>
   </div>
@@ -351,8 +366,8 @@
 <section id="how" style="background: #fff;">
   <div class="wrap">
     <span class="eyebrow">How it works</span>
-    <h2>Plug in once. Win leads forever.</h2>
-    <p class="sub">No engineers. No 40-page setup guide. Install the app, sign into your accounts once, flip the switch.</p>
+    <h2>Set up once. Runs on its own.</h2>
+    <p class="sub">No engineers, no config files. Install the app, sign into your accounts once, flip it on.</p>
 
     <div class="steps">
       <div class="step"><h3>Install</h3><p>Download the ReplyHawk app for Mac. One click to install — no command line, no config files.</p></div>
@@ -363,51 +378,54 @@
   </div>
 </section>
 
-<!-- ====== THE FLOW ====== -->
+<!-- ====== CRM / DASHBOARD ====== -->
 <section id="flow">
   <div class="wrap">
-    <span class="eyebrow">The flow</span>
-    <h2>See exactly what happens to every lead.</h2>
-    <p class="sub">No black box. Every lead moves through four clear stages — and you can see the next action it's about to take, with a live countdown, right in your dashboard.</p>
+    <span class="eyebrow">The dashboard</span>
+    <h2>A CRM that runs itself.</h2>
+    <p class="sub">Every lead from every platform on one board. You see the stage, the next action, and the full conversation. The AI moves them through — you watch deals close.</p>
 
-    <div class="flow">
-      <div class="stage s-new">
-        <div class="arrow">→</div>
-        <span class="badge">New</span>
-        <h3>A lead lands</h3>
-        <p>The moment a Yelp or Thumbtack lead arrives (or you import a list), it shows up here within seconds.</p>
-        <div class="who">Captured by <span>the desktop agent</span></div>
+    <!-- board mock -->
+    <div class="board">
+      <div class="col">
+        <div class="col-h">New <span class="n">2</span></div>
+        <div class="lc"><div class="nm">Stuart H.</div><div class="mt">Window screens · 91103</div><div class="nx call">📞 Initial call · now</div></div>
+        <div class="lc"><div class="nm">Maria L.</div><div class="mt">Drywall repair</div><div class="nx reply">💬 Initial reply · now</div></div>
       </div>
-
-      <div class="stage s-contact">
-        <div class="arrow">→</div>
-        <span class="badge">Contacted</span>
-        <h3>We reach out — instantly</h3>
-        <p>ReplyHawk calls the customer <em>and</em> replies on the thread, automatically. After hours, the call is held until morning.</p>
-        <div class="who">Voice agent + AI reply <span>· you waiting on them</span></div>
+      <div class="col">
+        <div class="col-h">Contacted <span class="n">2</span></div>
+        <div class="lc"><div class="nm">Dev P.</div><div class="mt">Fence install</div><div class="nx wait">🔁 Follow-up · in 9 min</div></div>
+        <div class="lc"><div class="nm">Anna R.</div><div class="mt">Cooktop repair</div><div class="nx wait">🔁 Follow-up · in 1 hr</div></div>
       </div>
-
-      <div class="stage s-engage">
-        <div class="arrow">→</div>
-        <span class="badge">Engaged</span>
-        <h3>They answer back</h3>
-        <p>The customer replies or picks up. The AI keeps the conversation going — answering questions and pushing toward a booking.</p>
-        <div class="who">AI back-and-forth <span>· your turn, handled</span></div>
+      <div class="col">
+        <div class="col-h">Engaged <span class="n">1</span></div>
+        <div class="lc"><div class="nm">Carlos M.</div><div class="mt">Water heater</div><div class="nx reply">💬 AI replying…</div></div>
       </div>
-
-      <div class="stage s-won">
-        <span class="badge">Booked / Closed</span>
-        <h3>Deal locked</h3>
-        <p>Appointment booked? It's marked <strong>Won</strong> and the AI goes quiet. Not interested? Marked <strong>Closed</strong>. No endless pestering.</p>
-        <div class="who">Auto-detected <span>· you get notified</span></div>
+      <div class="col">
+        <div class="col-h">Booked <span class="n">1</span></div>
+        <div class="lc"><div class="nm">Janet K.</div><div class="mt">Tue 10:00 AM</div><div class="nx won">✓ Won</div></div>
+      </div>
+      <div class="col">
+        <div class="col-h">Closed <span class="n">1</span></div>
+        <div class="lc"><div class="nm">Tom B.</div><div class="mt">Hired someone else</div><div class="nx" style="color:#94A3B8">— Lost</div></div>
       </div>
     </div>
 
+    <!-- the 4 stages explained -->
+    <div class="flow">
+      <div class="stage s-new"><div class="arrow">→</div><span class="badge">New</span><h3>Lead lands</h3><p>A Yelp/Thumbtack lead (or an imported contact) appears in seconds.</p><div class="who">Caught automatically</div></div>
+      <div class="stage s-contact"><div class="arrow">→</div><span class="badge">Contacted</span><h3>Reply + call</h3><p>The AI texts the thread and calls the customer. After hours, the call waits till morning.</p><div class="who">You're waiting on them</div></div>
+      <div class="stage s-engage"><div class="arrow">→</div><span class="badge">Engaged</span><h3>They respond</h3><p>Customer replies or picks up. The AI keeps it going toward a booking.</p><div class="who">Your turn — handled</div></div>
+      <div class="stage s-won"><span class="badge">Booked / Closed</span><h3>Deal settled</h3><p>Booked → marked Won, AI goes quiet. Not interested → Closed.</p><div class="who">Auto-detected · you're notified</div></div>
+    </div>
+
     <div class="guarantees">
-      <div class="grow"><div class="gi">⚡</div><div><h4>Reply + call, in seconds</h4><p>Every new lead gets a text reply and a phone call automatically — not one or the other.</p></div></div>
-      <div class="grow"><div class="gi">🔁</div><div><h4>Smart follow-ups</h4><p>No answer? ReplyHawk re-tries on your schedule, up to your limit — then stops. It never gives up too early or nags too long.</p></div></div>
-      <div class="grow"><div class="gi">🌙</div><div><h4>Respects quiet hours</h4><p>Calls only go out inside your calling window. A 2am lead is queued and called first thing in the morning.</p></div></div>
-      <div class="grow"><div class="gi">🙋</div><div><h4>Knows when to hand off</h4><p>Once a job is booked, the AI stops replying — and if that customer messages again, a human gets pinged instead.</p></div></div>
+      <div class="grow"><div class="gi">⚡</div><div><h4>Reply <em>and</em> call</h4><p>Every new lead gets both — a text on the thread and a phone call. Not one or the other.</p></div></div>
+      <div class="grow"><div class="gi">🔁</div><div><h4>Follow-ups, your rules</h4><p>No answer? It re-tries on your schedule, up to your limit, then stops. You set the delay and cap.</p></div></div>
+      <div class="grow"><div class="gi">🌙</div><div><h4>Quiet hours</h4><p>Calls only inside your window. A 2 AM lead is queued and called first thing in the morning.</p></div></div>
+      <div class="grow"><div class="gi">📋</div><div><h4>Full record</h4><p>Every call transcript, message, and status change logged on the lead — plus the next action with a live countdown.</p></div></div>
+      <div class="grow"><div class="gi">📥</div><div><h4>Import a list</h4><p>Paste a contact list and the same engine calls through it for you. Built for outreach, not just inbound.</p></div></div>
+      <div class="grow"><div class="gi">🙋</div><div><h4>Hands off when done</h4><p>Once booked, the AI stops. If that customer messages again, a human gets pinged.</p></div></div>
     </div>
   </div>
 </section>
@@ -417,28 +435,28 @@
   <div class="wrap">
     <span class="eyebrow">Platforms</span>
     <h2>One AI. Every lead source you use.</h2>
-    <p class="sub">Direct integrations — not browser hacks. The same conversation thread, but ten times faster.</p>
+    <p class="sub">Replies land in the customer's real Yelp/Thumbtack thread — the same conversation, just answered in seconds.</p>
 
     <div class="platforms">
       <div class="plat">
         <h3>Yelp</h3>
-        <div class="speed">~10 sec reply</div>
+        <div class="speed">Replies in seconds</div>
         <ul>
-          <li>Replies to quote requests and DMs in seconds</li>
-          <li>Improves your Yelp Response Time badge</li>
-          <li>Auto-call bridges you to the customer the moment they share a phone</li>
-          <li>Smart follow-ups for silent leads</li>
+          <li>Answers quote requests and messages within seconds of arrival</li>
+          <li>Faster replies help your Yelp Response Time badge</li>
+          <li>AI voice agent calls the customer to lock in the job</li>
+          <li>Auto follow-ups on leads that go quiet</li>
         </ul>
       </div>
 
       <div class="plat">
         <h3>Thumbtack</h3>
-        <div class="speed">~20 sec reply + SMS</div>
+        <div class="speed">Replies in seconds</div>
         <ul>
-          <li>Replies via Thumbtack messaging <em>and</em> direct SMS to the customer's phone</li>
-          <li>Customer doesn't have to re-open the app — your message is on their lock screen</li>
-          <li>Filters out unqualified leads automatically</li>
-          <li>Auto-call bridges you live</li>
+          <li>Replies in the Thumbtack thread automatically</li>
+          <li>Keeps the back-and-forth going as the customer responds</li>
+          <li>Declines jobs you don't take, so your pipeline stays clean</li>
+          <li>AI voice agent calls the customer to lock in the job</li>
         </ul>
       </div>
 
@@ -451,38 +469,38 @@
   <div class="wrap">
     <span class="eyebrow">Features</span>
     <h2>Built to close — not just to reply.</h2>
-    <p class="sub">Speed gets you in the door. The AI's job is to keep the customer talking until the deal is yours.</p>
+    <p class="sub">Speed gets you in the door. The AI keeps the customer talking until the job is booked.</p>
 
     <div class="features">
       <div class="feat">
         <div class="ficon">⚡</div>
-        <h3>Replies that sound like you</h3>
-        <p>Context-aware, written in your voice, with a clear next-step. Customers don't realize it's AI.</p>
+        <h3>Replies in your voice</h3>
+        <p>Written from your business profile and the full thread — specific to what the customer asked, never a canned template.</p>
       </div>
       <div class="feat">
         <div class="ficon">📞</div>
-        <h3>Instant two-way calls</h3>
-        <p>The moment a customer shares a number, ReplyHawk dials your phone. Press 1 — you're live with them.</p>
-      </div>
-      <div class="feat">
-        <div class="ficon">🤖</div>
-        <h3>AI that takes the call</h3>
-        <p>Optional voice agent answers when you can't, qualifies the lead, and books the visit — in your voice, in English or Spanish.</p>
+        <h3>AI voice agent calls</h3>
+        <p>Places the outbound call, qualifies the job, and books the appointment — in English or Spanish. Full transcript saved to the lead.</p>
       </div>
       <div class="feat">
         <div class="ficon">🎯</div>
-        <h3>Filters out time-wasters</h3>
-        <p>Tell us what you don't do (or won't take). The AI politely declines and saves your inbox for paying jobs.</p>
+        <h3>Skips the wrong jobs</h3>
+        <p>Tell it what you don't do. It declines those politely so your pipeline only fills with work you want.</p>
       </div>
       <div class="feat">
         <div class="ficon">🔁</div>
-        <h3>Never let a lead go cold</h3>
-        <p>Customer went quiet? Smart follow-ups at +10 min, +1 hr, +24 hr re-ignite the conversation. No lead left behind.</p>
+        <h3>Follows up automatically</h3>
+        <p>Quiet lead? It re-tries on the delay and attempt cap you set, then stops. No chasing, no nagging.</p>
       </div>
       <div class="feat">
-        <div class="ficon">📥</div>
-        <h3>One unified inbox</h3>
-        <p>Yelp, Thumbtack, and SMS in one place. No app-switching. No missed messages.</p>
+        <div class="ficon">📋</div>
+        <h3>One board, every lead</h3>
+        <p>Yelp and Thumbtack in a single pipeline with conversation, call transcripts, and the next scheduled action per lead.</p>
+      </div>
+      <div class="feat">
+        <div class="ficon">🔒</div>
+        <h3>Your account, your machine</h3>
+        <p>Runs from your own Mac and login. We never see your password — replies come from your real account.</p>
       </div>
     </div>
   </div>
@@ -502,11 +520,11 @@
         <p class="desc">Just you, one business, one or two lead sources. Up to 30 leads/week.</p>
         <div class="price-amount">$1.99<span class="per">/lead replied</span></div>
         <ul class="price-list">
-          <li>Yelp + Thumbtack integrations</li>
-          <li>AI replies, follow-ups, qualification</li>
-          <li>2-way auto-call bridging</li>
-          <li>SMS to customer (where supported)</li>
-          <li>Email and SMS alerts for hot leads</li>
+          <li>Yelp + Thumbtack, one pipeline</li>
+          <li>AI replies, follow-ups, and job qualification</li>
+          <li>AI voice agent calls every lead</li>
+          <li>Live dashboard: stages, conversations, next action</li>
+          <li>Booked-lead and hand-off alerts</li>
         </ul>
         <a href="#demo" class="btn btn-primary">Start free trial</a>
       </div>
